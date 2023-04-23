@@ -64,8 +64,8 @@ class NetworkManager: ObservableObject {
         for i in selectedLocation.residents {
             AF.request(i)
                 .responseDecodable(of: Character.self) { response in
-                    if let charactersres = response.value {
-                        characters.append(charactersres)
+                    if let charactersRespond = response.value {
+                        characters.append(charactersRespond)
                         completion(characters)
                     } else {
                         print("error while selected location's characters fetching")

@@ -11,6 +11,7 @@ struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
     @State private var selectedLocation: Location?
     @State var isSelectedChanged = false
+    @State var isFetched = false
     
     var body: some View {
         NavigationView {
@@ -20,7 +21,10 @@ struct ContentView: View {
                 }, fetchNextPage: viewModel.fetchNextPage)
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
-                    viewModel.fetchData()
+                    if !isFetched {
+                        viewModel.fetchData()
+                        isFetched.toggle()
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
